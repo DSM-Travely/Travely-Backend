@@ -30,6 +30,6 @@ public class ReviewController {
     @GetMapping("/mylist")
     public ReviewListResponse getMyReviewList() { return reviewService.getMyReviewList(); }
 
-    @DeleteMapping
-    public void deleteReview(@RequestBody Integer reviewId) { reviewService.deleteReview(reviewId);}
+    @DeleteMapping("/{reviewId}")
+    public void deleteReview(@PathVariable Integer reviewId) { reviewService.deleteReview(reviewId);}
 }

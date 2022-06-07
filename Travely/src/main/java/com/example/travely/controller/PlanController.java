@@ -6,6 +6,8 @@ import com.example.travely.service.PlanService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/plan")
@@ -25,6 +27,11 @@ public class PlanController {
     @PatchMapping("/{planId}")
     public void updatePlanState(@PathVariable Integer planId) {
         planService.updatePlan(planId);
+    }
+
+    @DeleteMapping("/{planId")
+    public void deletePlan(@PathVariable Integer planId) {
+        planService.deletePlan(planId);
     }
 
 }
