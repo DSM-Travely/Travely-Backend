@@ -2,6 +2,7 @@ package com.example.travely.controller;
 
 import com.example.travely.dto.ProfileResponse;
 import com.example.travely.dto.UserSignInRequest;
+import com.example.travely.dto.UserSignInResponse;
 import com.example.travely.dto.UserSignUpRequest;
 import com.example.travely.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,7 @@ public class UserController {
     }
 
     @PostMapping("/auth")
-    public void signIn(@RequestBody UserSignInRequest request) {
+    public UserSignInResponse signIn(@RequestBody UserSignInRequest request) {
         userService.signIn(request);
     }
 
