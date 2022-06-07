@@ -1,15 +1,14 @@
 package com.example.travely.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
 import java.util.List;
 
 @Getter
-@AllArgsConstructor
 @Builder
 public class ReviewResponse {
+    private Integer id;
     private String mainImage;
     private String profileImage;
     private String reviewer;
