@@ -3,11 +3,13 @@ package com.example.travely.entity.reviewimage;
 import com.example.travely.entity.review.Review;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+@Getter
 @AllArgsConstructor
 @Builder
 @NoArgsConstructor

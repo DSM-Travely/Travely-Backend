@@ -47,7 +47,7 @@ public class Review {
     @JoinColumn(name = "email")
     private User user;
 
-    @OneToMany(mappedBy = "review")
+    @OneToMany(mappedBy = "review", cascade = CascadeType.ALL)
     private List<ReviewImage> reviewImages;
 
     @OneToMany(mappedBy = "review")
