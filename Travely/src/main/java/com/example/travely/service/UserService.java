@@ -1,5 +1,6 @@
 package com.example.travely.service;
 
+import com.example.travely.dto.ProfileResponse;
 import com.example.travely.dto.UserSignInRequest;
 import com.example.travely.dto.UserSignInResponse;
 import com.example.travely.dto.UserSignUpRequest;
@@ -17,6 +18,8 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
+
+    private final AuthorizationService authorizationService;
 
     public void signUp(UserSignUpRequest request) {
         User user = User.builder()
@@ -37,6 +40,19 @@ public class UserService {
         return UserSignInResponse.builder()
                 .token(accessToken)
                 .build();
+    }
+
+    public ProfileResponse getProfile() {
+        User user = authorizationService.getUser();
+        return ProfileResponse.builder()
+                .email(user.getEmail())
+                .nickname(user.getNickname())
+                .build();
+    }
+
+    public void deleteUser() {
+        User user = authorizationService.getUser();
+        userRepository.delete(user);
     }
 
 }

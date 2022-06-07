@@ -1,5 +1,6 @@
 package com.example.travely.service;
 
+import com.example.travely.dto.PlanDetailResponse;
 import com.example.travely.dto.PlanListResponse;
 import com.example.travely.dto.PlanResponse;
 import com.example.travely.dto.SavePlanRequest;
@@ -22,6 +23,8 @@ public class PlanService {
     private final PlanRepository planRepository;
     private final UserRepository userRepository;
 
+    private final AuthorizationService authorizationService;
+
     public void savePlan(SavePlanRequest savePlanRequest) {
         Plan plan = Plan.builder()
                 .title(savePlanRequest.getTitle())
@@ -33,9 +36,7 @@ public class PlanService {
     }
 
     public PlanListResponse getPlanList() {
-        String email = SecurityContextHolder.getContext().getAuthentication().getName();
-        User user = userRepository.findById(email)
-                .orElseThrow(UserNotFoundException::new);
+        User user = authorizationService.getUser();
 
         List<Plan> plans = planRepository.findAllByUser(user);
 
@@ -53,9 +54,36 @@ public class PlanService {
 
     @Transactional
     public void updatePlan(Integer planId) {
+        User user = authorizationService.getUser();
+
         Plan plan = planRepository.findById(planId)
+                .filter(plan1 -> plan1.getUser().equals(user))
                 .orElseThrow(PlanNotFoundException::new);
 
         plan.modifyIsChecked();
+    }
+
+    public PlanDetailResponse getPlanDetail(Integer planId) {
+        User user = authorizationService.getUser();
+
+        Plan plan = planRepository.findById(planId)
+                .filter(plan1 -> plan1.getUser().equals(user))
+                .orElseThrow(PlanNotFoundException::new);
+
+        return PlanDetailResponse.builder()
+                .title(plan.getTitle())
+                .address(plan.getAddress())
+                .content(plan.getContent())
+                .build();
+    }
+
+    public void deletePlan(Integer planId) {
+        User user = authorizationService.getUser();
+
+        Plan plan = planRepository.findById(planId)
+                .filter(plan1 -> plan1.getUser().equals(user))
+                .orElseThrow(PlanNotFoundException::new);
+
+        planRepository.delete(plan);
     }
 }
