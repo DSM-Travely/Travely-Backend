@@ -2,7 +2,6 @@ package com.example.travely.controller;
 
 import com.example.travely.dto.PlanListResponse;
 import com.example.travely.dto.SavePlanRequest;
-import com.example.travely.entity.plan.Plan;
 import com.example.travely.service.PlanService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

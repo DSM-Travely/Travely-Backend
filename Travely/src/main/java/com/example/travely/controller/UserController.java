@@ -1,9 +1,11 @@
 package com.example.travely.controller;
 
+import com.example.travely.dto.ProfileResponse;
 import com.example.travely.dto.UserSignInRequest;
 import com.example.travely.dto.UserSignUpRequest;
 import com.example.travely.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,4 +24,7 @@ public class UserController {
     public void signIn(@RequestBody UserSignInRequest request) {
         userService.signIn(request);
     }
+
+    @GetMapping("/user")
+    public ProfileResponse getProfile() { return userService.getProfile(); }
 }
