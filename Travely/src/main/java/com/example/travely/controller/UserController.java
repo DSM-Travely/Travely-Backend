@@ -20,7 +20,7 @@ public class UserController {
 
     @PostMapping("/auth")
     public UserSignInResponse signIn(@RequestBody UserSignInRequest request) {
-        userService.signIn(request);
+        return userService.signIn(request);
     }
 
     @GetMapping("/user")
