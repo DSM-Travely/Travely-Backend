@@ -1,12 +1,11 @@
 package com.example.travely.controller;
 
+import com.example.travely.dto.PlanDetailResponse;
 import com.example.travely.dto.PlanListResponse;
 import com.example.travely.dto.SavePlanRequest;
 import com.example.travely.service.PlanService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import javax.websocket.server.PathParam;
 
 @RequiredArgsConstructor
 @RestController
@@ -22,6 +21,11 @@ public class PlanController {
     @GetMapping
     public PlanListResponse getPlanList() {
         return planService.getPlanList();
+    }
+
+    @GetMapping("/{palnId}")
+    public PlanDetailResponse getPlanDetail(@PathVariable Integer planId) {
+        return planService.getPlanDetail(planId);
     }
 
     @PatchMapping("/{planId}")

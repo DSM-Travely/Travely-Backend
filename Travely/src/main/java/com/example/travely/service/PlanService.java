@@ -47,6 +47,7 @@ public class PlanService {
                 .map(plan -> PlanResponse.builder()
                         .isChecked(plan.getIsChecked())
                         .title(plan.getTitle())
+                        .id(plan.getId())
                         .build())
                 .toList();
 
