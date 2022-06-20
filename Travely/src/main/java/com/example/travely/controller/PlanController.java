@@ -23,7 +23,7 @@ public class PlanController {
         return planService.getPlanList();
     }
 
-    @GetMapping("/{palnId}")
+    @GetMapping("/{planId}")
     public PlanDetailResponse getPlanDetail(@PathVariable Integer planId) {
         return planService.getPlanDetail(planId);
     }
