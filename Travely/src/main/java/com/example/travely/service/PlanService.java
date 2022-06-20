@@ -25,11 +25,14 @@ public class PlanService {
 
     private final AuthorizationService authorizationService;
 
+    @Transactional
     public void savePlan(SavePlanRequest savePlanRequest) {
+        User user = authorizationService.getUser();
         Plan plan = Plan.builder()
                 .title(savePlanRequest.getTitle())
                 .address(savePlanRequest.getAddress())
                 .content(savePlanRequest.getContent())
+                .user(user)
                 .build();
 
         planRepository.save(plan);

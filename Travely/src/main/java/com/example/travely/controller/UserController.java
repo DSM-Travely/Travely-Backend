@@ -26,6 +26,6 @@ public class UserController {
     @GetMapping("/user")
     public ProfileResponse getProfile() { return userService.getProfile(); }
 
-    @DeleteMapping
+    @DeleteMapping("/user")
     public void deleteUser() { userService.deleteUser(); }
 }
